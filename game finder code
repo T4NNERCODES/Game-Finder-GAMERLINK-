@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Game Finder</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f2f2f2;
+    }
+    .container {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+        text-align: center;
+    }
+    button {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        margin: 10px auto;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    button:hover {
+        background-color: #0056b3;
+    }
+    label {
+        display: block;
+        margin-bottom: 10px;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>Answer the following questions to find your next game:</h1>
+    <div id="questions">
+        <label for="genre">What genre do you prefer?</label>
+        <select id="genre">
+            <option value="action">Action</option>
+            <option value="adventure">Adventure</option>
+            <option value="rpg">RPG</option>
+            <option value="strategy">Strategy</option>
+            <option value="simulation">Simulation</option>
+            <option value="puzzle">Puzzle</option>
+            <option value="multiplayer">Multiplayer</option>
+            <option value="horror">Horror</option>
+        </select>
+
+        <label for="platform">Which platform are you playing on?</label>
+        <select id="platform">
+            <option value="pc">PC</option>
+            <option value="playstation">PlayStation</option>
+            <option value="xbox">Xbox</option>
+            <option value="nintendo">Nintendo</option>
+            <option value="mobile">Mobile</option>
+        </select>
+
+        <label for="age">What's your preferred age rating?</label>
+        <select id="age">
+            <option value="everyone">Everyone</option>
+            <option value="teen">Teen</option>
+            <option value="mature">Mature</option>
+            <option value="adults_only">Adults Only</option>
+        </select>
+    </div>
+    <button id="findGameButton">Find Me a Game</button>
+    <div id="gameResult"></div>
+</div>
+
+<script>
+    const games = [
+        { name: "The Witcher 3: Wild Hunt", genre: "rpg", platform: "pc", age: "mature" },
+        { name: "The Legend of Zelda: Breath of the Wild", genre: "adventure", platform: "nintendo", age: "everyone" },
+        { name: "Red Dead Redemption 2", genre: "action", platform: "playstation", age: "mature" },
+        { name: "Dark Souls III", genre: "action", platform: "pc", age: "mature" },
+        { name: "Animal Crossing: New Horizons", genre: "simulation", platform: "nintendo", age: "everyone" },
+        { name: "Fortnite", genre: "multiplayer", platform: "pc", age: "teen" },
+        { name: "Minecraft", genre: "sandbox", platform: "multiplatform", age: "everyone" },
+        { name: "Grand Theft Auto V", genre: "action", platform: "multiplatform", age: "mature" },
+        { name: "Overwatch", genre: "multiplayer", platform: "multiplatform", age: "teen" },
+        { name: "Among Us", genre: "party", platform: "multiplatform", age: "everyone" },
+        { name: "Cyberpunk 2077", genre: "rpg", platform: "pc", age: "mature" },
+        { name: "Super Mario Odyssey", genre: "platformer", platform: "nintendo", age: "everyone" },
+        { name: "Fallout 4", genre: "rpg", platform: "multiplatform", age: "mature" },
+        { name: "Hades", genre: "action", platform: "pc", age: "teen" },
+        { name: "God of War", genre: "action", platform: "playstation", age: "mature" },
+        { name: "League of Legends", genre: "strategy", platform: "pc", age: "teen" },
+        { name: "Dota 2", genre: "strategy", platform: "pc", age: "teen" },
+        { name: "Call of Duty: Warzone", genre: "multiplayer", platform: "multiplatform", age: "mature" },
+        { name: "Apex Legends", genre: "multiplayer", platform: "multiplatform", age: "teen" },
+        { name: "Valorant", genre: "multiplayer", platform: "pc", age: "teen" }
+    ];
+
+    const findGameButton = document.getElementById("findGameButton");
+    const gameResult = document.getElementById("gameResult");
+
+    findGameButton.addEventListener("click", () => {
+        const genre = document.getElementById("genre").value;
+        const platform = document.getElementById("platform").value;
+        const age = document.getElementById("age").value;
+
+        const filteredGames = games.filter(game => game.genre === genre && game.platform === platform && game.age === age);
+
+        if (filteredGames.length > 0) {
+            const randomIndex = Math.floor(Math.random() * filteredGames.length);
+            const randomGame = filteredGames[randomIndex].name;
+            gameResult.innerHTML = `<p>We suggest you try <strong>${randomGame}</strong>.</p>`;
+        } else {
+            gameResult.innerHTML = "<p>Sorry, we couldn't find a game that matches your preferences.</p>";
+        }
+    });
+</script>
+</body>
+</html>
